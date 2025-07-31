@@ -21,6 +21,7 @@
   git clone https://github.com/Vampxyz/WayneIndustries.git
   cd [WayneIndustries]
   ```
+  </details>
 
   <!-- Versão em Português -->
   <details open>
