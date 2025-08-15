@@ -7,18 +7,18 @@ const labels = document.querySelectorAll("label");
 db = [
   {
     username: "ryhan",
-    password: "2411",
+    password: "1111",
     role: "admin",
   },
   {
-    username: "nohan",
-    password: "2411",
-    role: "user",
+    username: "joao",
+    password: "1111",
+    role: "manager",
   },
   {
-    username: "flavia",
-    password: "2411",
-    role: "user",
+    username: "maria",
+    password: "1111",
+    role: "employee",
   },
 ];
 generateUsers = () => {

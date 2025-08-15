@@ -8,9 +8,11 @@
   /* Cores principais */
   --main-bg: #161616;
   --main-text: #fff;
-  --accent-color: #fff;
+  --accent-color: #ffde06;
   --secondary-bg: #353535;
   --secondary-text: #000;
+
+  --border-color: #5d5d5d;
 
   /* Tipografia */
   --font-primary: "", sans-serif;
@@ -61,15 +63,18 @@ aside {
 
   background-color: var(--secondary-bg);
   color: var(--main-text);
+  font-weight: normal;
   border-right: 1px solid var(--border-color);
-
-  opacity: 0.6;
 }
-aside:hover {
-  opacity: 1;
+aside.collapsed {
+  opacity: 0.6;
 }
 aside.expanded {
   width: 280px;
+  opacity: 1;
+}
+aside.collapsed:hover {
+  opacity: 1;
 }
 
 /* Top bar */
@@ -86,11 +91,13 @@ aside.expanded {
   font-size: 1.6rem;
   cursor: pointer;
 }
-.close-icon {
+aside.collapsed #closeSidebar {
   display: none;
 }
-
-aside.expanded .close-icon {
+aside.collapsed #toggleSidebar {
+  display: inline;
+}
+aside.expanded #closeSidebar {
   display: inline;
 }
 aside.expanded #toggleSidebar {
@@ -116,9 +123,19 @@ aside .menu .menu-item {
   border-radius: 0.5rem;
   transition: all 0.2s ease-in-out;
 }
+
+aside.collapsed .menu .menu-item {
+  padding: 0;
+}
+aside.expanded .menu .menu-item {
+  padding: 0.75rem;
+}
+
 aside .menu .menu-item:hover {
-  background-color: var(--main-bg);
   transform: scale(1.1);
+}
+aside.expanded .menu .menu-item:hover {
+  background-color: var(--main-bg);
 }
 
 .menu .menu-item i {
@@ -134,11 +151,28 @@ aside .menu .menu-item:hover {
   white-space: nowrap;
 }
 
+.menu .menu-item:hover i, .menu .menu-item:hover label {
+  color: var(--accent-color);
+}
+
 aside .menu.bottom-settings {
   padding: 1rem 1rem;
 }
 
-aside .menu.bottom-settings .menu-item .info {
+aside .menu.bottom-settings .menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+}
+aside .menu.bottom-settings .menu-item .container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu.bottom-settings .menu-item .container .info {
   display: flex;
   flex-direction: column;
 }
@@ -149,10 +183,34 @@ aside .menu.bottom-settings .menu-item .info small {
   font-weight: bold;
   opacity: 0;
   transition: opacity 0.3s ease;
-
 }
 aside.expanded .menu.bottom-settings .menu-item .info small {
   opacity: 1;
+}
+
+aside .menu.bottom-settings .menu-item > i {
+  position: absolute;
+  right: 100%;
+
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+aside.expanded .menu.bottom-settings .menu-item:hover > i {
+  right: 5%;
+  opacity: 1;
+}
+
+aside.expanded .menu.bottom-settings .menu-item:hover .container .setings-icon {
+  animation: rotating 1.5s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 aside.expanded .menu .menu-item label {
@@ -167,4 +225,34 @@ main {
 }
 aside.expanded ~ main {
   margin-left: 280px;
+}
+
+main header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+main header .logout {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  opacity: 0.6;
+
+  transition: scale 0.1s ease;
+}
+main header .logout:hover {
+  scale: 1.2;
+  opacity: 1;
+}
+main header .logout i {
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  color: #fff;
+}
+main header .logout:hover i {
+  color: var(--accent-color);
 }
