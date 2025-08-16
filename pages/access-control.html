@@ -19,24 +19,29 @@
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
-    <link rel="stylesheet" href="../css/index.css" />
-    <script src="../js/main.js" defer></script>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/access-control.css" />
     <title>WI - Access Control</title>
   </head>
   <body>
+    <!-- Sidebar -->
     <aside id="sidebar" class="collapsed">
+      <!-- Top bar -->
       <div class="top-bar">
         <i id="toggleSidebar" class="fi fi-sr-menu-burger"></i>
         <i id="closeSidebar" class="fi fi-sr-bars-staggered close-icon"></i>
       </div>
 
+      <!-- Middle menu -->
       <nav id="menu" class="menu middle-menu">
-        <a href="./index.html" class="menu-item">
-          <i class="fi fi-sr-dashboard-panel"></i>
+        <a href="./dashboard.html" class="menu-item">
+          <i class="fi fi-sr-dashboard-panel active"></i>
+
           <label class="label">Dashboard</label>
         </a>
       </nav>
 
+      <!-- Bottom settings -->
       <nav class="menu bottom-settings">
         <a href="#" class="menu-item">
           <div class="container">
@@ -55,20 +60,80 @@
     </aside>
 
     <main>
+      <!-- Header -->
       <header>
-        <h1 id="greetings">Bem vindo à Wayne Industries,</h1>
+        <h1>Access Control</h1>
 
         <button class="logout" onclick="logout()">
           <i class="fi fi-sr-user-logout"></i>
         </button>
       </header>
 
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-        accusantium quaerat hic, maiores sed non quae quidem voluptatem omnis.
-        Iure illo eos quibusdam expedita adipisci nulla molestiae laborum
-        temporibus neque!
-      </p>
+      <div class="container">
+        <!-- Actions -->
+        <div class="actions-container">
+          <!-- Search -->
+          <div class="search-bar">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search users..."
+            />
+
+            <i class="fi fi-sr-search"></i>
+          </div>
+
+          <!-- Buttons -->
+          <div class="buttons-group">
+            <!-- Add Button -->
+            <button id="add-btn" class="action-btn add-btn">
+              <i class="fi fi-sr-plus"></i> Add
+            </button>
+
+            <!-- Edit Button -->
+            <button id="edit-btn" class="action-btn edit-btn">
+              <i class="fi fi-sr-pencil"></i> Edit
+            </button>
+
+            <!-- Delete Button -->
+            <button id="delete-btn" class="action-btn delete-btn">
+              <i class="fi fi-sr-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <table class="users-table">
+          <!-- Table Header -->
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+
+          <!-- Table Body -->
+          <tbody id="users-table-body">
+            <tr>
+              <td>Ryhan</td>
+              <td>ADM</td>
+            </tr>
+
+            <tr>
+              <td>Joao</td>
+              <td>Manager</td>
+            </tr>
+
+            <tr>
+              <td>Maria</td>
+              <td>Employee</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </main>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/access-control.js"></script>
   </body>
 </html>

@@ -1,28 +1,24 @@
-// AUTHENTICATION
-window.localStorage.removeItem("users");
+database = JSON.parse(localStorage.getItem("Database"));
+console.log(database);
 
+// AUTHENTICATION
 loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
-if (loggedUser === null) {
+if (loggedUser === null || !loggedUser) {
   window.location.href = "../pages/login.html";
 }
 user = loggedUser[0];
 
-const isAdmin = user.role === "admin";
-const isManager = user.role === "manager";
-const isEmployee = user.role === "employee";
+const userRoles = {
+    admin: user.role === "admin",
+    manager: user.role === "manager",
+    employee: user.role === "employee"
+}
+
 console.log(
   `${
-    isAdmin ? "Admin" : isManager ? "Gerente" : isEmployee ? "Funcionario" : ""
+    userRoles.admin ? "Admin" : userRoles.manager ? "Gerente" : userRoles.employee ? "Funcionario" : ""
   } - ${user.username}`
 );
-
-// GREETINGS
-document.getElementById(
-  "greetings"
-).textContent = `Bem vindo à Wayne Industries, ${user.username}!`;
-
-// USER ROLE
-document.getElementById("user-role").textContent = user.role;
 
 const logout = () => {
   localStorage.removeItem("loggedUser");
@@ -30,28 +26,26 @@ const logout = () => {
 };
 
 // CODE RIGHT ABOVE
-const sidebar = document.getElementById("sidebar");
 const toggleSidebar = document.getElementById("toggleSidebar");
 const closeSidebar = document.getElementById("closeSidebar");
-const menuItem = document.querySelectorAll(".menu-item");
-const bottomSettings = document.getElementById("bottomSettings");
+const sidebar = document.getElementById("sidebar");
 const sideMenu = document.querySelector('.middle-menu');
 
 sideMenu.innerHTML = '';
 sideMenu.innerHTML += `
-    <a href="./index.html" class="menu-item">
+    <a href="./dashboard.html" class="menu-item">
         <i class="fi fi-sr-dashboard-panel"></i>
         <label class="label">Dashboard</label>
     </a>
 `;
 
-if (user.role === 'admin') {
+if (userRoles.admin) {
     sideMenu.innerHTML += `
         <a href="./access-control.html" class="menu-item">
             <i class="fi fi-sr-lock"></i>
             <label class="label">Access Control</label>
         </a>
-        <a href="./resource-management.html" class="menu-item">
+        <a href="./resource-managemant.html" class="menu-item">
             <i class="fi fi-sr-tools"></i>
             <label class="label">Resource Management</label>
         </a>
@@ -60,9 +54,9 @@ if (user.role === 'admin') {
             <label class="label">Reports</label>
         </a>
     `;
-} else if (user.role === 'manager') {
+} else if (userRoles.manager) {
     sideMenu.innerHTML += `
-        <a href="./resource-management.html" class="menu-item">
+        <a href="./resource-managemant.html" class="menu-item">
             <i class="fi fi-sr-tools"></i>
             <label class="label">Resource Management</label>
         </a>
@@ -71,7 +65,7 @@ if (user.role === 'admin') {
             <label class="label">Reports</label>
         </a>
     `;
-} else if (user.role === 'employee') {
+} else if (userRoles.employee) {
     sideMenu.innerHTML += `
         <a href="./profile.html" class="menu-item">
             <i class="fi fi-sr-user"></i>
@@ -80,16 +74,10 @@ if (user.role === 'admin') {
     `;
 }
 
-
-
 toggleSidebar.addEventListener("click", () => {
   sidebar.classList.add("expanded");
-
-  bottomSettings.style.padding = "0.75rem";
 });
 
 closeSidebar.addEventListener("click", () => {
   sidebar.classList.remove("expanded");
-
-  bottomSettings.style.padding = "0";
 });

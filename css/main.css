@@ -218,10 +218,12 @@ aside.expanded .menu .menu-item label {
 }
 
 /* Main */
-main {
+aside.collapsed ~ main {
   margin-left: 60px;
   padding: 2rem;
   transition: margin-left 0.3s ease;
+
+  width: 100%;
 }
 aside.expanded ~ main {
   margin-left: 280px;
@@ -231,6 +233,7 @@ main header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
   margin-bottom: 2rem;
 }
 

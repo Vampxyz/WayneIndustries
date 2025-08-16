@@ -21,30 +21,73 @@ db = [
     role: "employee",
   },
 ];
-generateUsers = () => {
-  localStorage.setItem("users", JSON.stringify(db));
+
+// Generate Users
+const generateUsers = () => {
+  const dataBase = db.map((user) => ({
+    username: `${user.username.charAt(0).toUpperCase()}${user.username.slice(
+      1
+    )}`,
+    password: user.password,
+    role: user.role,
+  }));
+
+  localStorage.setItem("users", JSON.stringify(dataBase));
 };
 generateUsers();
 
+// Generate Data
+generateData = () => {
+  const tempData = JSON.parse(localStorage.getItem("users"));
+
+  dataBase = [];
+
+  for (let i = 0; i < tempData.length; i++) {
+    const tempUser = data[i];
+
+    const userData = {
+      username:
+        tempUser.username.charAt(0).toUpperCase() + tempUser.username.slice(1),
+      role: tempUser.role,
+    };
+
+    dataBase.push(userData);
+  }
+
+  localStorage.setItem("Database", JSON.stringify(dataBase));
+};
+
+// Get Data
 data = JSON.parse(localStorage.getItem("users"));
 
+// Form
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
+  generateData();
+
   if (
     data.find(
-      (user) => user.username === username && user.password === password
+      (user) =>
+        user.username.toLowerCase() === username.toLowerCase() &&
+        user.password.toLowerCase() === password.toLowerCase()
     )
   ) {
     console.log(`Usuário ${username} logado com sucesso!`);
 
-    userData = [data.find((user) => user.username === username)];
+    userData = [
+      data.find(
+        (user) => user.username.toLowerCase() === username.toLowerCase()
+      ),
+    ];
+    window.localStorage.removeItem("users");
+
     localStorage.setItem("loggedUser", JSON.stringify(userData));
 
-    window.location.href = "../pages/index.html";
+    window.location.href = "../pages/dashboard.html";
   } else if (username === "" || password === "") {
     error.innerHTML = "Preencha todos os campos!";
     error.style.display = "block";
@@ -62,9 +105,10 @@ form.addEventListener("submit", (e) => {
   }
 });
 
+// Input animation
 labels.forEach((label) => {
   label.innerHTML = label.innerText
     .split("")
     .map((l, i) => `<span style="transition-delay: ${i * 50}ms;">${l}</span>`)
-    .join("")
+    .join("");
 });

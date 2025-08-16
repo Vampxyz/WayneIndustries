@@ -19,24 +19,29 @@
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
-    <link rel="stylesheet" href="../css/index.css" />
-    <script src="../js/main.js" defer></script>
-    <title>Wayne Industries</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/resource-managemant.css" />
+    <title>WI - Resource Managemant</title>
   </head>
   <body>
+    <!-- Sidebar -->
     <aside id="sidebar" class="collapsed">
+      <!-- Top bar -->
       <div class="top-bar">
         <i id="toggleSidebar" class="fi fi-sr-menu-burger"></i>
         <i id="closeSidebar" class="fi fi-sr-bars-staggered close-icon"></i>
       </div>
 
+      <!-- Middle menu -->
       <nav id="menu" class="menu middle-menu">
-        <a href="./index.html" class="menu-item">
-          <i class="fi fi-sr-dashboard-panel"></i>
+        <a href="./dashboard.html" class="menu-item">
+          <i class="fi fi-sr-dashboard-panel active"></i>
+
           <label class="label">Dashboard</label>
         </a>
       </nav>
 
+      <!-- Bottom settings -->
       <nav class="menu bottom-settings">
         <a href="#" class="menu-item">
           <div class="container">
@@ -56,19 +61,15 @@
 
     <main>
       <header>
-        <h1 id="greetings">Bem vindo à Wayne Industries,</h1>
+        <h1 id="greetings">Resource Managemant</h1>
 
         <button class="logout" onclick="logout()">
           <i class="fi fi-sr-user-logout"></i>
         </button>
       </header>
-
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam
-        accusantium quaerat hic, maiores sed non quae quidem voluptatem omnis.
-        Iure illo eos quibusdam expedita adipisci nulla molestiae laborum
-        temporibus neque!
-      </p>
     </main>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/resource-managemant.js"></script>
   </body>
 </html>
