@@ -9,16 +9,22 @@ db = [
     username: "ryhan",
     password: "1111",
     role: "admin",
+    status: "active",
+    salary: "$1000",
   },
   {
     username: "joao",
     password: "1111",
     role: "manager",
+    status: "inactive",
+    salary: "$500",
   },
   {
     username: "maria",
     password: "1111",
     role: "employee",
+    status: "active",
+    salary: "$1500",
   },
 ];
 
@@ -30,6 +36,8 @@ const generateUsers = () => {
     )}`,
     password: user.password,
     role: user.role,
+    status: user.status,
+    salary: user.salary,
   }));
 
   localStorage.setItem("users", JSON.stringify(dataBase));
@@ -49,6 +57,8 @@ generateData = () => {
       username:
         tempUser.username.charAt(0).toUpperCase() + tempUser.username.slice(1),
       role: tempUser.role,
+      status: tempUser.status,
+      salary: tempUser.salary,
     };
 
     dataBase.push(userData);

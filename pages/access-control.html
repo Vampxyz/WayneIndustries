@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
     />
     <link
       rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css"
     />
     <link
       rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-straight/css/uicons-thin-straight.css"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-straight/css/uicons-thin-straight.css"
     />
     <link
       rel="stylesheet"
@@ -79,8 +79,8 @@
               id="search-input"
               placeholder="Search users..."
             />
-
             <i class="fi fi-sr-search"></i>
+            <button id="search-btn" onclick="searchUser()">Search User</button>
           </div>
 
           <!-- Buttons -->
@@ -102,35 +102,95 @@
           </div>
         </div>
 
-        <!-- Table -->
-        <table class="users-table">
-          <!-- Table Header -->
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Role</th>
-            </tr>
-          </thead>
+        <div class="table-container">
+          <!-- Table -->
+          <table class="users-table">
+            <!-- Table Header -->
+            <thead>
+              <tr>
+                <th class="user-name">Username</th>
+                <th class="user-role">Role</th>
+                <th class="user-status">Status</th>
+                <th class="user-salary">Salary</th>
+              </tr>
+            </thead>
 
-          <!-- Table Body -->
-          <tbody id="users-table-body">
-            <tr>
-              <td>Ryhan</td>
-              <td>ADM</td>
-            </tr>
+            <!-- Table Body -->
+            <tbody id="users-table-body">
+              <tr>
+                <td class="user-name">Ryhan</td>
+                <td class="user-role">ADM</td>
+                <td class="user-status"><span class="status-badge status-active">Active</span></td>
+                <td class="user-salary">$1000</td>
+              </tr>
 
-            <tr>
-              <td>Joao</td>
-              <td>Manager</td>
-            </tr>
+              <tr>
+                <td class="user-name">Joao Silva de Souza Ferreira</td>
+                <td class="user-role">Manager</td>
+                <td class="user-status"><span class="status-badge status-inactive">Inactive</span></td>
+                <td class="user-salary">$500</td>
+              </tr>
 
-            <tr>
-              <td>Maria</td>
-              <td>Employee</td>
-            </tr>
-          </tbody>
-        </table>
+              <tr>
+                <td class="user-name">Maria Silva de Souza Ferreira da Silva da Silva da Silva da Silva</td>
+                <td class="user-role">Employee</td>
+                <td class="user-status"><span class="status-badge status-active">Active</span></td>
+                <td class="user-salary">$1500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      <!-- Modals -->
+      <div id="addModal">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Add User</h2>
+
+          <button class="close-modal" onclick="closeModal('addModal')">
+            <i class="fi fi-sr-cross"></i>
+          </button>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="modal-content">
+          <!-- Form -->
+          <form id="add-form">
+            <!-- Username -->
+            <div class="form-group">
+              <label>Username:</label>
+              <input type="text" id="add-username" placeholder="Username" />
+            </div>
+
+            <!-- Role -->
+            <div class="form-group">
+              <label>Role:</label>
+              <input type="text" id="add-role" placeholder="Role" />
+            </div>
+
+            <!-- Status -->
+            <div class="form-group">
+              <label>Status:</label>
+              <select id="add-status">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+
+            <!-- Salary -->
+            <div class="form-group">
+              <label>Salary:</label>
+              <input type="number" id="add-salary" placeholder="Salary" />
+            </div>
+          </form>
+
+          <button class="btn" onclick="addUser()">Add User</button>
+        </div>
+      </div>
+
+      <div id="editModal"></div>
+      <div id="deleteModal"></div>
     </main>
 
     <script src="../js/utils.js"></script>
