@@ -10,21 +10,21 @@ db = [
     password: "1111",
     role: "admin",
     status: "active",
-    salary: "$1000",
+    salary: "1000",
   },
   {
     username: "joao",
     password: "1111",
     role: "manager",
     status: "inactive",
-    salary: "$500",
+    salary: "500",
   },
   {
     username: "maria",
     password: "1111",
     role: "employee",
     status: "active",
-    salary: "$1500",
+    salary: "1500",
   },
 ];
 

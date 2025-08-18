@@ -1,200 +1,371 @@
 main {
-    display: flex;
-    flex-direction: column;    
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* 1 - Container */
 main .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
 }
 
 /* 1.1 - Actions Container */
 main .container .actions-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    gap: 1rem;
-    
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+
+  width: 100%;
 }
 
 /* 1.11 - Search Bar */
 main .container .actions-container .search-bar {
-    position: relative;
-    
-    width: fit-content;
-    height: fit-content;
+  position: relative;
 
-    display: flex;
-    flex-direction: row;
+  width: fit-content;
+  height: fit-content;
 
+  display: flex;
+  flex-direction: row;
 }
 .container .actions-container .search-bar input {
-    width: 100%;
+  width: 100%;
 
-    padding: 0.8rem 1rem;
-    padding-inline: 2.2rem;
+  padding: 0.8rem 1rem;
+  padding-inline: 2.2rem;
 
-    border: 1px solid var(--border-color);
-    border-right: none;
-    border-radius: 5px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+  border: 1px solid var(--border-color);
+  border-right: none;
+  border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 
-    color: var(--main-text);
-    font-weight: bold;
+  color: var(--main-text);
+  font-weight: bold;
 
-    background: #434444;
-    outline: none;
+  background: #434444;
+  outline: none;
 }
 .container .actions-container .search-bar i {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
 }
 .container .actions-container .search-bar button {
-    cursor: pointer;
+  cursor: pointer;
 
-    width: 200px;
-    padding: 0.8rem 1rem;
+  width: 200px;
+  padding: 0.8rem 1rem;
 
-    border: 1px solid var(--border-color);
-    border-left: none;
-    border-radius: 5px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 
-    color: var(--main-text);
-    font-weight: bold;
+  color: var(--main-text);
+  font-weight: bold;
 
-    background-color: hsla(180, 1%, 26%, 0.8);
+  background-color: hsla(180, 1%, 26%, 0.8);
 
-    transition: all 0.2s ease;
-    opacity: 0.8;
+  transition: all 0.2s ease;
+  opacity: 0.8;
 }
 .container .actions-container .search-bar button:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 /* 1.12 - Buttons Group */
 main .container .actions-container .buttons-group {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 .container .actions-container .buttons-group button {
-    cursor: pointer;
+  cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 
-    width: 200px;
-    padding: 0.8rem 1rem;
+  width: 200px;
+  padding: 0.8rem 1rem;
 
-    border: none;
-    border-radius: 5px;
+  border: none;
+  border-radius: 5px;
 
-    font-weight: bold;
+  font-weight: bold;
 
-    position: relative;
+  position: relative;
 }
 .actions-container .buttons-group button i {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%)
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
 }
 
 .container .actions-container .buttons-group button.add-btn {
-    background-color: #00d415; 
+  background-color: #00d415;
 }
 .container .actions-container .buttons-group button.edit-btn {
-    background-color: #ffd700;
+  background-color: #ffd700;
 }
 .container .actions-container .buttons-group button.delete-btn {
-    background-color: #ff4757;
+  background-color: #ff4757;
 }
 
 /* 1.2 */
 main .container .table-container {
-    width: 100%;
+  width: 100%;
 
-    border: 1px solid rgb(0, 0, 0, 0.3);
-    /* outline: 1px solid rgb(0, 0, 0, 0.3); */
-    border-radius: 5px;
-    overflow: hidden;
+  border: 1px solid rgb(0, 0, 0, 0.3);
+  /* outline: 1px solid rgb(0, 0, 0, 0.3); */
+  border-radius: 5px;
+  overflow: hidden;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 1.2.1 */
 main .container .table-container .users-table {
-    width: 100%;
+  width: 100%;
 
-    background-color: #353535;
+  background-color: #353535;
 
-    table-layout: fixed;
+  table-layout: fixed;
 
-    border: none;
-    outline: none;
-    border-collapse: collapse;
-    border-radius: 5px;
+  border: none;
+  outline: none;
+  border-collapse: collapse;
+  border-radius: 5px;
 
-    padding: 0.8rem 1rem;
+  padding: 0.8rem 1rem;
 
-    overflow: hidden;
+  overflow: hidden;
 }
 
 /* 1.2.1.1 */
 main .container .table-container .users-table thead {
-    width: 100%;
+  width: 100%;
 }
 
 main .container .table-container .users-table thead th {
-    padding: 0.8rem 1rem;
+  padding: 0.8rem 1rem;
 
-    background-color: #222;
+  background-color: #222;
 
-    border-bottom: 1px solid #444;
+  border-bottom: 1px solid #444;
 }
 
 /* 1.2.1.2 */
 main .container .table-container .users-table tbody {
-    width: 100%;
+  width: 100%;
 }
 
 main .container .table-container .users-table tbody td {
-    padding: 0.8rem 1rem;
+  padding: 0.8rem 1rem;
 
-    border-bottom: 1px solid #444;
-    border-right: 1px solid #444;
+  border-bottom: 1px solid #444;
+  border-right: 1px solid #444;
 
-    text-wrap: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .user-name {
-    width: 40%;
+  width: 40%;
 }
 
-.user-role, .user-status, .user-salary {
-    width: 20%;
+.user-role,
+.user-status,
+.user-salary {
+  width: 20%;
 
-    text-align: center;
+  text-align: center;
+}
+
+/* 2 - Add Modal */
+main .add-modal {
+  position: absolute;
+  z-index: 9999;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  padding: 3rem 5rem;
+  border-radius: 5px;
+  background-color: #474747;
+}
+main .add-modal::before {
+  content: "";
+
+  position: absolute;
+  top: 1;
+  left: 1;
+  z-index: -1;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* 2.1 - Add Modal Header */
+main .add-modal .modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+main .add-modal .modal-header h2 {
+  font-size: 1.7rem;
+}
+main .add-modal .modal-header button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+}
+.add-modal .modal-header button i {
+  font-size: 1.5rem;
+  color: #fff;
+
+  transition: all 0.1s ease-in-out;
+}
+.add-modal .modal-header button i:hover {
+  color: #ff4757;
+}
+
+/* 2.2 - Add Modal Content */
+main .add-modal .modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* 2.2.1 - Add Modal Form */
+main .add-modal .modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* 2.2.1.1 - Add Modal Form Group */
+.add-modal .modal-content form .form-group {
+  position: relative;
+
+  width: 100%;
+}
+.add-modal .modal-content form .form-group label {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+
+  transition: all 0.15s ease-in-out;
+}
+.add-modal .modal-content form .form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  padding-inline: 1rem;
+
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+
+  background: #434444;
+  color: var(--main-text);
+  font-weight: bold;
+}
+.add-modal .modal-content form .form-group select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  padding-inline: 1rem;
+
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+
+  background: #434444;
+  color: var(--main-text);
+  font-weight: bold;
+}
+
+/* Label */
+.modal-content form .form-group label span {
+  margin: 0;
+
+  display: inline-block;
+  transition: all 0.15s ease-in-out;
+
+  font-size: 14px;
+  color: var(--main-text);
+  opacity: 0.4;
+  font-weight: bold;
+
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.modal-content form .form-group input:focus ~ label,
+.modal-content form .form-group input:not(:placeholder-shown) ~ label {
+  left: .5rem;
+}
+.modal-content form .form-group input:focus ~ label span,
+.modal-content form .form-group input:not(:placeholder-shown) ~ label span {
+  top: -25px;
+  left: 0;
+  transform: translateY(-50%) scale(0.85);
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* 2.2.2 - Add Modal Button */
+main .add-modal .modal-content button {
+  padding: 0.6rem 1rem;
+  width: 100%;
+  cursor: pointer;
+
+  border-radius: 5px;
+  border: none;
+
+  font-size: 1rem;
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  color: var(--secondary-text);
+  font-weight: bold;
+
+  position: relative;
+  bottom: 0;
+  left: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+main .add-modal .modal-content button:hover {
+  background: linear-gradient(45deg, #ffed4e, #ffd700);
+  bottom: 4px;
+  left: 0;
 }

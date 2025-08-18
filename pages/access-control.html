@@ -86,17 +86,17 @@
           <!-- Buttons -->
           <div class="buttons-group">
             <!-- Add Button -->
-            <button id="add-btn" class="action-btn add-btn">
+            <button id="add-btn" class="action-btn add-btn" onclick="openModal('addModal')">
               <i class="fi fi-sr-plus"></i> Add
             </button>
 
             <!-- Edit Button -->
-            <button id="edit-btn" class="action-btn edit-btn">
+            <button id="edit-btn" class="action-btn edit-btn" onclick="openModal('editModal')">
               <i class="fi fi-sr-pencil"></i> Edit
             </button>
 
             <!-- Delete Button -->
-            <button id="delete-btn" class="action-btn delete-btn">
+            <button id="delete-btn" class="action-btn delete-btn" onclick="openModal('deleteModal')">
               <i class="fi fi-sr-trash"></i> Delete
             </button>
           </div>
@@ -120,21 +120,30 @@
               <tr>
                 <td class="user-name">Ryhan</td>
                 <td class="user-role">ADM</td>
-                <td class="user-status"><span class="status-badge status-active">Active</span></td>
+                <td class="user-status">
+                  <span class="status-badge status-active">Active</span>
+                </td>
                 <td class="user-salary">$1000</td>
               </tr>
 
               <tr>
                 <td class="user-name">Joao Silva de Souza Ferreira</td>
                 <td class="user-role">Manager</td>
-                <td class="user-status"><span class="status-badge status-inactive">Inactive</span></td>
+                <td class="user-status">
+                  <span class="status-badge status-inactive">Inactive</span>
+                </td>
                 <td class="user-salary">$500</td>
               </tr>
 
               <tr>
-                <td class="user-name">Maria Silva de Souza Ferreira da Silva da Silva da Silva da Silva</td>
+                <td class="user-name">
+                  Maria Silva de Souza Ferreira da Silva da Silva da Silva da
+                  Silva
+                </td>
                 <td class="user-role">Employee</td>
-                <td class="user-status"><span class="status-badge status-active">Active</span></td>
+                <td class="user-status">
+                  <span class="status-badge status-active">Active</span>
+                </td>
                 <td class="user-salary">$1500</td>
               </tr>
             </tbody>
@@ -143,7 +152,7 @@
       </div>
 
       <!-- Modals -->
-      <div id="addModal">
+      <div id="addModal" class="add-modal" style="display: none;">
         <!-- Modal Header -->
         <div class="modal-header">
           <h2 class="modal-title">Add User</h2>
@@ -159,20 +168,26 @@
           <form id="add-form">
             <!-- Username -->
             <div class="form-group">
-              <label>Username:</label>
-              <input type="text" id="add-username" placeholder="Username" />
+              <input type="text" id="add-username" placeholder=" " required />
+
+              <label for="add-username">Username:</label>
+
             </div>
 
             <!-- Role -->
             <div class="form-group">
-              <label>Role:</label>
-              <input type="text" id="add-role" placeholder="Role" />
+              <select id="add-role" required>
+                <option value="" selected disabled >Select a role</option>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="employee">Employee</option>
+              </select>
             </div>
 
             <!-- Status -->
             <div class="form-group">
-              <label>Status:</label>
-              <select id="add-status">
+              <select id="add-status" required>
+                <option value="" selected disabled >Select a status</option>
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
               </select>
@@ -180,8 +195,9 @@
 
             <!-- Salary -->
             <div class="form-group">
-              <label>Salary:</label>
-              <input type="number" id="add-salary" placeholder="Salary" />
+              <input type="number" id="add-salary" placeholder=" " required />
+              
+              <label for="add-salary">Salary:</label>
             </div>
           </form>
 
@@ -189,8 +205,8 @@
         </div>
       </div>
 
-      <div id="editModal"></div>
-      <div id="deleteModal"></div>
+      <div id="editModal" class="edit-modal"></div>
+      <div id="deleteModal" class="delete-modal"></div>
     </main>
 
     <script src="../js/utils.js"></script>
