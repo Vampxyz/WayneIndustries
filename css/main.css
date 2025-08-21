@@ -143,7 +143,7 @@ aside.expanded .menu .menu-item:hover {
 
   font-size: 1.5rem;
 }
-.menu .menu-item label {
+.menu .menu-item p {
   cursor: pointer;
 
   opacity: 0;
@@ -151,7 +151,7 @@ aside.expanded .menu .menu-item:hover {
   white-space: nowrap;
 }
 
-.menu .menu-item:hover i, .menu .menu-item:hover label {
+.menu .menu-item:hover i, .menu .menu-item:hover p {
   color: var(--accent-color);
 }
 
@@ -213,7 +213,7 @@ aside.expanded .menu.bottom-settings .menu-item:hover .container .setings-icon {
   }
 }
 
-aside.expanded .menu .menu-item label {
+aside.expanded .menu .menu-item p {
   opacity: 1;
 }
 

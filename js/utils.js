@@ -20,6 +20,7 @@ console.log(
   } - ${user.username}`
 );
 
+// LOGOUT
 const logout = () => {
   localStorage.removeItem("loggedUser");
   window.location.reload();
@@ -35,7 +36,7 @@ sideMenu.innerHTML = '';
 sideMenu.innerHTML += `
     <a href="./dashboard.html" class="menu-item">
         <i class="fi fi-sr-dashboard-panel"></i>
-        <label class="label">Dashboard</label>
+        <p class="p">Dashboard</p>
     </a>
 `;
 
@@ -43,33 +44,33 @@ if (userRoles.admin) {
     sideMenu.innerHTML += `
         <a href="./access-control.html" class="menu-item">
             <i class="fi fi-sr-lock"></i>
-            <label class="label">Access Control</label>
+            <p class="p">Access Control</p>
         </a>
-        <a href="./resource-managemant.html" class="menu-item">
+        <a href="./resource-management.html" class="menu-item">
             <i class="fi fi-sr-tools"></i>
-            <label class="label">Resource Management</label>
+            <p class="p">Resource Management</p>
         </a>
         <a href="./reports.html" class="menu-item">
             <i class="fi fi-sr-document"></i>
-            <label class="label">Reports</label>
+            <p class="p">Reports</p>
         </a>
     `;
 } else if (userRoles.manager) {
     sideMenu.innerHTML += `
-        <a href="./resource-managemant.html" class="menu-item">
+        <a href="./resource-management.html" class="menu-item">
             <i class="fi fi-sr-tools"></i>
-            <label class="label">Resource Management</label>
+            <p class="p">Resource Management</p>
         </a>
         <a href="./reports.html" class="menu-item">
             <i class="fi fi-sr-document"></i>
-            <label class="label">Reports</label>
+            <p class="p">Reports</p>
         </a>
     `;
 } else if (userRoles.employee) {
     sideMenu.innerHTML += `
         <a href="./profile.html" class="menu-item">
             <i class="fi fi-sr-user"></i>
-            <label class="label">Profile</label>
+            <p class="p">Profile</p>
         </a>
     `;
 }

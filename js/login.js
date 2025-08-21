@@ -4,80 +4,94 @@ const form = document.querySelector("form");
 const error = document.getElementById("error");
 const labels = document.querySelectorAll("label");
 
-db = [
-  {
-    username: "ryhan",
-    password: "1111",
-    role: "admin",
-    status: "active",
-    salary: "1000",
-  },
-  {
-    username: "joao",
-    password: "1111",
-    role: "manager",
-    status: "inactive",
-    salary: "500",
-  },
-  {
-    username: "maria",
-    password: "1111",
-    role: "employee",
-    status: "active",
-    salary: "1500",
-  },
-];
-
 // Generate Users
-const generateUsers = () => {
-  const dataBase = db.map((user) => ({
-    username: `${user.username.charAt(0).toUpperCase()}${user.username.slice(
-      1
-    )}`,
-    password: user.password,
-    role: user.role,
-    status: user.status,
-    salary: user.salary,
-  }));
+if (!localStorage.getItem("users")) {
+  db = [
+    {
+      ID: 1,
+      username: "ryhan",
+      password: "1111",
+      role: "admin",
+      status: "active",
+      salary: "1000",
+    },
+    {
+      ID: 2,
+      username: "joao",
+      password: "1111",
+      role: "manager",
+      status: "inactive",
+      salary: "500",
+    },
+    {
+      ID: 3,
+      username: "maria",
+      password: "1111",
+      role: "employee",
+      status: "active",
+      salary: "1500",
+    },
+  ];
 
-  localStorage.setItem("users", JSON.stringify(dataBase));
-};
-generateUsers();
+  const generateUsers = () => {
+    const dataBase = db.map((user) => ({
+      ID: user.ID,
+      username: `${user.username.charAt(0).toUpperCase()}${user.username.slice(
+        1
+      )}`,
+      password: user.password,
+      role: user.role,
+      status: user.status,
+      salary: user.salary,
+    }));
 
-// Generate Data
-generateData = () => {
-  const tempData = JSON.parse(localStorage.getItem("users"));
+    localStorage.setItem("users", JSON.stringify(dataBase));
+  };
 
-  dataBase = [];
-
-  for (let i = 0; i < tempData.length; i++) {
-    const tempUser = data[i];
-
-    const userData = {
-      username:
-        tempUser.username.charAt(0).toUpperCase() + tempUser.username.slice(1),
-      role: tempUser.role,
-      status: tempUser.status,
-      salary: tempUser.salary,
-    };
-
-    dataBase.push(userData);
-  }
-
-  localStorage.setItem("Database", JSON.stringify(dataBase));
-};
+  generateUsers();
+}
 
 // Get Data
-data = JSON.parse(localStorage.getItem("users"));
+const data = JSON.parse(localStorage.getItem("users"));
 
 // Form
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
+  // Generate Data
+  if (
+    !localStorage.getItem("Database") ||
+    localStorage.getItem("Database") === null
+  ) {
+    const generateData = () => {
+      const tempData = JSON.parse(localStorage.getItem("users"));
+
+      const dataBase = [];
+
+      for (let i = 0; i < tempData.length; i++) {
+        const tempUser = data[i];
+
+        const newUserData = {
+          ID: tempUser.ID,
+          username:
+            tempUser.username.charAt(0).toUpperCase() +
+            tempUser.username.slice(1),
+          role: tempUser.role,
+          status: tempUser.status,
+          salary: tempUser.salary,
+        };
+
+        dataBase.push(newUserData);
+      }
+
+      localStorage.setItem("Database", JSON.stringify(dataBase));
+    };
+
+    generateData();
+  }
+
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
-
-  generateData();
 
   if (
     data.find(
