@@ -183,20 +183,35 @@ main .container .table-container .users-table tbody td {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.user-name {
-  width: 40%;
+
+.user-email {
+  width: 20%;
 }
 
-.user-role,
-.user-status,
-.user-salary {
+.user-password {
   width: 10%;
 
   text-align: center;
 }
 
+.user-role,
+.user-status,
+.user-salary,
+.user-id {
+  width: 10%;
+  text-align: center;
+}
+.user-id {
+  width: 5%;
+}
+
+.user-username {
+  width: 30%;
+  text-align: center;
+}
+
 .user-actions {
-  width: 20%;
+  width: 15%;
   text-align: center;
 }
 .user-actions button {

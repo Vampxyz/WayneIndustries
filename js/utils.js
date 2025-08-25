@@ -1,8 +1,6 @@
-database = JSON.parse(localStorage.getItem("Database"));
-console.log(database);
-
 // AUTHENTICATION
 loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
 if (loggedUser === null || !loggedUser) {
   window.location.href = "../pages/login.html";
 }
@@ -31,6 +29,7 @@ const toggleSidebar = document.getElementById("toggleSidebar");
 const closeSidebar = document.getElementById("closeSidebar");
 const sidebar = document.getElementById("sidebar");
 const sideMenu = document.querySelector('.middle-menu');
+document.getElementById("user-role").textContent = user.role;
 
 sideMenu.innerHTML = '';
 sideMenu.innerHTML += `

@@ -104,6 +104,8 @@
             <thead>
               <tr>
                 <th class="user-id">ID</th>
+                <th class="user-email">Email</th>
+                <th class="password">Password</th>
                 <th class="user-name">Username</th>
                 <th class="user-role">Role</th>
                 <th class="user-status">Status</th>
@@ -113,7 +115,18 @@
             </thead>
 
             <!-- Table Body -->
-            <tbody id="users-table-body"></tbody>
+            <tbody id="users-table-body">
+              <tr>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -134,11 +147,30 @@
         <div class="modal-content">
           <!-- Form -->
           <form id="add-form">
+            <!-- Email -->
+            <div class="form-group">
+              <input type="email" id="add-email" placeholder=" " required />
+
+              <label for="add-email">Email</label>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <input
+                type="password"
+                id="add-password"
+                placeholder=" "
+                required
+              />
+
+              <label for="add-password">Password</label>
+            </div>
+
             <!-- Username -->
             <div class="form-group">
               <input type="text" id="add-username" placeholder=" " required />
 
-              <label for="add-username">Username:</label>
+              <label for="add-username">Username</label>
             </div>
 
             <!-- Role -->
@@ -164,7 +196,7 @@
             <div class="form-group">
               <input type="number" id="add-salary" placeholder=" " required />
 
-              <label for="add-salary">Salary:</label>
+              <label for="add-salary">Salary</label>
             </div>
           </form>
 
@@ -187,6 +219,25 @@
         <div class="modal-content">
           <!-- Form -->
           <form id="edit-form">
+            <!-- Email -->
+            <div class="form-group">
+              <input type="email" id="edit-email" placeholder=" " required />
+
+              <label for="edit-email">Email:</label>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <input
+                type="password"
+                id="edit-password"
+                placeholder=" "
+                required
+              />
+
+              <label for="edit-password">Password:</label>
+            </div>
+
             <!-- Username -->
             <div class="form-group">
               <input type="text" id="edit-username" placeholder=" " required />

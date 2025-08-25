@@ -1,4 +1,6 @@
-window.localStorage.removeItem("loggedUser");
+if (localStorage.getItem("loggedUser")) {
+  window.localStorage.removeItem("loggedUser");
+}
 
 const form = document.querySelector("form");
 const error = document.getElementById("error");
@@ -9,7 +11,8 @@ if (!localStorage.getItem("users")) {
   db = [
     {
       ID: 1,
-      username: "ryhan",
+      username: "Ryhan Nalbert",
+      email: "ryhannalbert@gmail.com",
       password: "1111",
       role: "admin",
       status: "active",
@@ -17,7 +20,8 @@ if (!localStorage.getItem("users")) {
     },
     {
       ID: 2,
-      username: "joao",
+      username: "Joao Carlos",
+      email: "joaocarlos@gmail.com",
       password: "1111",
       role: "manager",
       status: "inactive",
@@ -25,7 +29,8 @@ if (!localStorage.getItem("users")) {
     },
     {
       ID: 3,
-      username: "maria",
+      username: "Maria Anabela",
+      email: "mariaanabela@gmail.com",
       password: "1111",
       role: "employee",
       status: "active",
@@ -36,9 +41,8 @@ if (!localStorage.getItem("users")) {
   const generateUsers = () => {
     const dataBase = db.map((user) => ({
       ID: user.ID,
-      username: `${user.username.charAt(0).toUpperCase()}${user.username.slice(
-        1
-      )}`,
+      username: user.username,
+      email: user.email,
       password: user.password,
       role: user.role,
       status: user.status,
@@ -58,61 +62,28 @@ const data = JSON.parse(localStorage.getItem("users"));
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // Generate Data
-  if (
-    !localStorage.getItem("Database") ||
-    localStorage.getItem("Database") === null
-  ) {
-    const generateData = () => {
-      const tempData = JSON.parse(localStorage.getItem("users"));
-
-      const dataBase = [];
-
-      for (let i = 0; i < tempData.length; i++) {
-        const tempUser = data[i];
-
-        const newUserData = {
-          ID: tempUser.ID,
-          username:
-            tempUser.username.charAt(0).toUpperCase() +
-            tempUser.username.slice(1),
-          role: tempUser.role,
-          status: tempUser.status,
-          salary: tempUser.salary,
-        };
-
-        dataBase.push(newUserData);
-      }
-
-      localStorage.setItem("Database", JSON.stringify(dataBase));
-    };
-
-    generateData();
-  }
-
-  const username = document.getElementById("username").value;
+  // Login
+  const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
   if (
     data.find(
       (user) =>
-        user.username.toLowerCase() === username.toLowerCase() &&
+        user.email.toLowerCase() === email.toLowerCase() &&
         user.password.toLowerCase() === password.toLowerCase()
     )
   ) {
-    console.log(`Usuário ${username} logado com sucesso!`);
-
-    userData = [
-      data.find(
-        (user) => user.username.toLowerCase() === username.toLowerCase()
-      ),
+    
+    // Logged User
+    loggedUser = [
+      data.find((user) => user.email.toLowerCase() === email.toLowerCase()),
     ];
-    window.localStorage.removeItem("users");
+    localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
 
-    localStorage.setItem("loggedUser", JSON.stringify(userData));
+    console.log(`Usuário ${loggedUser[0].username} logado com sucesso!`);
 
     window.location.href = "../pages/dashboard.html";
-  } else if (username === "" || password === "") {
+  } else if (email === "" || password === "") {
     error.innerHTML = "Preencha todos os campos!";
     error.style.display = "block";
 
@@ -120,13 +91,14 @@ form.addEventListener("submit", (e) => {
       error.style.display = "none";
     }, 3000);
   } else {
-    error.innerHTML = "Usuário ou senha inválido!";
+    error.innerHTML = "Credenciais inválidas!";
     error.style.display = "block";
 
     setTimeout(() => {
       error.style.display = "none";
     }, 3000);
   }
+  // }
 });
 
 // Input animation
