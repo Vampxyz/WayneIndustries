@@ -19,8 +19,8 @@
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/reports.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css')}}" />
     <title>Wayne Industries</title>
   </head>
   <body>
@@ -66,7 +66,7 @@
 
      
     </main>
-    <script src="../js/utils.js"></script>
-    <script src="../js/reports.js"></script>
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/reports.js')}}"></script>
   </body>
 </html>

@@ -19,8 +19,8 @@
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/access-control.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/access-control.css') }}" />
     <title>WI - Access Control</title>
   </head>
   <body>
@@ -277,7 +277,7 @@
       </div>
     </main>
 
-    <script src="../js/utils.js"></script>
-    <script src="../js/access-control.js"></script>
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/access-control.js')}}"></script>
   </body>
 </html>

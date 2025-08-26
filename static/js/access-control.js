@@ -1,12 +1,32 @@
 const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 if (loggedUser[0].role !== "admin") {
-  window.location.href = "../pages/dashboard.html";
+  window.location.href = "/dashboard";
 }
 if (!loggedUser) {
-  window.location.href = "../pages/login.html";
+  window.location.href = "/login";
 }
 
-const users = JSON.parse(localStorage.getItem("users"));
+let users = [];
+
+const fetchUsers = async () => {
+  try {
+    const res = await fetch("http://127.0.0.1:5000/api/users");
+    const data = await res.json();
+
+    if (data.success) {
+      return users = data.users;
+
+    } else {
+      return users = data;
+    }
+  } catch (err) {
+    userTableBody.innerHTML =
+      '<tr><td colspan="8">Erro ao carregar dados. Tente novamente.</td></tr>';
+    throw new Error({ "ERRO: ": err });
+  }
+};
+fetchUsers()
+
 
 const userTableBody = document.getElementById("users-table-body");
 const labels = document.querySelectorAll("label");
@@ -16,8 +36,6 @@ const editModal = document.getElementById("editModal");
 
 addModal.style.display = "none";
 editModal.style.display = "none";
-
-let editingUser = null;
 
 const renderTable = () => {
   userTableBody.innerHTML = users
@@ -59,13 +77,12 @@ const closeModal = (id) => {
   document.getElementById(id).style.display = "none";
 };
 
+let editingUser = null;
+
 const openEditModal = (ID) => {
   editingUser = ID;
-  console.log(users.map((user) => user.ID));
-  console.log(ID);
 
   const userToEdit = users.find((user) => user.ID == ID);
-  console.log(userToEdit);
 
   if (userToEdit) {
     document.getElementById("edit-email").value = userToEdit.email;
@@ -81,12 +98,11 @@ const openEditModal = (ID) => {
 
 const openDeleteModal = (ID) => {
   const userToDelete = users.findIndex((user) => user.ID == ID);
-  
+
   if (userToDelete !== -1) {
     console.log(users, users[userToDelete]);
-    
-    users.splice(userToDelete, 1)
-    localStorage.setItem("users", JSON.stringify(users));
+
+    users.splice(userToDelete, 1);
     renderTable();
   }
 };
@@ -99,7 +115,14 @@ const addUser = () => {
   const status = document.getElementById("add-status");
   const salary = document.getElementById("add-salary");
 
-  if (!email.value || !password.value || !username.value || !role.value || !status.value || !salary.value) {
+  if (
+    !email.value ||
+    !password.value ||
+    !username.value ||
+    !role.value ||
+    !status.value ||
+    !salary.value
+  ) {
     alert("Por favor, preencha todos os campos!");
     return;
   }
@@ -115,8 +138,6 @@ const addUser = () => {
   };
 
   users.push(newUser);
-
-  localStorage.setItem("users", JSON.stringify(users));
 
   closeModal("addModal");
 
@@ -147,8 +168,6 @@ const editUser = () => {
     users[userIndex].role = role;
     users[userIndex].status = status;
     users[userIndex].salary = salary;
-
-    localStorage.setItem("users", JSON.stringify(users));
 
     closeModal("editModal");
     renderTable();

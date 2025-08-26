@@ -1,50 +1,22 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask
+from view import view_routes
+from api import api_routes
+from models import db, User
+
 app = Flask(__name__)
 
-users_db = [
-    {
-      "ID": 1,
-      "username": "Ryhan Nalbert",
-      "email": "ryhannalbert@gmail.com",
-      "password": "1111",
-      "role": "admin",
-      "status": "active",
-      "salary": "1000",
-    },
-    {
-      "ID": 2,
-      "username": "Joao Carlos",
-      "email": "joaocarlos@gmail.com",
-      "password": "1111",
-      "role": "manager",
-      "status": "inactive",
-      "salary": "500",
-    },
-    {
-      "ID": 3,
-      "username": "Maria Anabela",
-      "email": "mariaanabela@gmail.com",
-      "password": "1111",
-      "role": "employee",
-      "status": "active",
-      "salary": "1500",
-    },
-]
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+db.init_app(app)
 
-
-@app.route("/users")
-def get_users():
-    return jsonify(users_db)
-
-@app.route("/user/<int:user_id>")
-def get_user(user_id):
-    user = next((u for u in users_db if u["ID"] == user_id), None)
-
-    if user:
-        return jsonify(user)
-
-    return jsonify({"error": "User not found"}), 404
+app.register_blueprint(view_routes)
+app.register_blueprint(api_routes, url_prefix='/api')
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+        if not User.query.filter_by(email='ryhannalbert@gmail.com').first():
+            db.session.add(User(username="Ryhan Nalbert", email="ryhannalbert@gmail.com", password="1111", role="admin", status="active", salary="1000"))
+            db.session.commit()
     app.run(debug=True)
