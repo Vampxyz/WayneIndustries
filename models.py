@@ -1,6 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from extensions import db
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -18,6 +16,16 @@ class User(db.Model):
             'username': self.username,
             'email': self.email,
             'password': self.password,
+            'role': self.role,
+            'status': self.status,
+            'salary': self.salary,
+        }
+        
+    def to_dict_public(self):
+        return {
+            'ID': self.ID,
+            'username': self.username,
+            'email': self.email,
             'role': self.role,
             'status': self.status,
             'salary': self.salary,

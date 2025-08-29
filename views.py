@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 
 view_routes = Blueprint('view_routes', __name__)
 
+@view_routes.route("/")
 @view_routes.route("/login")
 def login_page():
     return render_template("login.html")

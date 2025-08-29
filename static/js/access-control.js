@@ -1,32 +1,30 @@
-const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
-if (loggedUser[0].role !== "admin") {
-  window.location.href = "/dashboard";
-}
-if (!loggedUser) {
-  window.location.href = "/login";
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+  if (loggedUser.role !== "admin") {
+    window.location.href = "/dashboard";
+  }
+  if (!loggedUser) {
+    window.location.href = "/login";
+  }
+});
 
 let users = [];
 
-const fetchUsers = async () => {
+const fetchUsersAndRenderTable = async () => {
   try {
     const res = await fetch("http://127.0.0.1:5000/api/users");
     const data = await res.json();
 
-    if (data.success) {
-      return users = data.users;
+    users = data.users;
 
-    } else {
-      return users = data;
-    }
+    renderTable();
   } catch (err) {
     userTableBody.innerHTML =
       '<tr><td colspan="8">Erro ao carregar dados. Tente novamente.</td></tr>';
     throw new Error({ "ERRO: ": err });
   }
 };
-fetchUsers()
-
+fetchUsersAndRenderTable();
 
 const userTableBody = document.getElementById("users-table-body");
 const labels = document.querySelectorAll("label");
@@ -80,9 +78,10 @@ const closeModal = (id) => {
 let editingUser = null;
 
 const openEditModal = (ID) => {
-  editingUser = ID;
+  const numericID = parseInt(ID);
+  editingUser = numericID;
 
-  const userToEdit = users.find((user) => user.ID == ID);
+  const userToEdit = users.find((user) => user.ID === numericID);
 
   if (userToEdit) {
     document.getElementById("edit-email").value = userToEdit.email;
@@ -91,85 +90,94 @@ const openEditModal = (ID) => {
     document.getElementById("edit-role").value = userToEdit.role;
     document.getElementById("edit-status").value = userToEdit.status;
     document.getElementById("edit-salary").value = userToEdit.salary;
-
     openModal("editModal");
   }
 };
 
-const openDeleteModal = (ID) => {
-  const userToDelete = users.findIndex((user) => user.ID == ID);
+const openDeleteModal = async (ID) => {
+  if (confirm("Tem certeza que deseja deletar este usuário?")) {
+    try {
+      const res = await fetch(`http://127.0.0.1:5000/api/users/${ID}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
 
-  if (userToDelete !== -1) {
-    console.log(users, users[userToDelete]);
-
-    users.splice(userToDelete, 1);
-    renderTable();
+      if (data.success) {
+        alert(data.message);
+        await fetchUsersAndRenderTable(); // Recarrega a tabela
+      } else {
+        alert("Erro ao deletar usuário.");
+      }
+    } catch (err) {
+      alert("Erro na requisição. Tente novamente.");
+      console.error(err);
+    }
   }
 };
 
-const addUser = () => {
-  const email = document.getElementById("add-email");
-  const password = document.getElementById("add-password");
-  const username = document.getElementById("add-username");
-  const role = document.getElementById("add-role");
-  const status = document.getElementById("add-status");
-  const salary = document.getElementById("add-salary");
+const addUser = async () => {
+  // Validação dos campos
+  const email = document.getElementById("add-email").value;
+  const password = document.getElementById("add-password").value;
+  const username = document.getElementById("add-username").value;
+  const role = document.getElementById("add-role").value;
+  const status = document.getElementById("add-status").value;
+  const salary = document.getElementById("add-salary").value;
 
-  if (
-    !email.value ||
-    !password.value ||
-    !username.value ||
-    !role.value ||
-    !status.value ||
-    !salary.value
-  ) {
+  if (!email || !password || !username || !role || !status || !salary) {
     alert("Por favor, preencha todos os campos!");
     return;
   }
 
-  const newUser = {
-    ID: users.length + 1,
-    email: email.value,
-    password: password.value,
-    username: username.value,
-    role: role.value,
-    status: status.value,
-    salary: salary.value,
-  };
+  const newUser = { email, password, username, role, status, salary };
 
-  users.push(newUser);
+  try {
+    const res = await fetch("http://127.0.0.1:5000/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUser),
+    });
+    const data = await res.json();
 
-  closeModal("addModal");
-
-  renderTable();
-
-  email.value = "";
-  password.value = "";
-  username.value = "";
-  role.value = "";
-  status.value = "";
-  salary.value = "";
+    if (data.success) {
+      closeModal("addModal");
+      await fetchUsersAndRenderTable();
+    } else {
+      alert(data.message);
+    }
+  } catch (err) {
+    alert("Erro ao adicionar usuário. Tente novamente.");
+    console.error(err);
+  }
 };
 
-const editUser = () => {
-  const email = document.getElementById("edit-email").value;
-  const password = document.getElementById("edit-password").value;
-  const username = document.getElementById("edit-username").value;
-  const role = document.getElementById("edit-role").value;
-  const status = document.getElementById("edit-status").value;
-  const salary = document.getElementById("edit-salary").value;
+const editUser = async () => {
+  const numericID = parseInt(editingUser);
+  const updatedUser = {
+    email: document.getElementById("edit-email").value,
+    password: document.getElementById("edit-password").value,
+    username: document.getElementById("edit-username").value,
+    role: document.getElementById("edit-role").value,
+    status: document.getElementById("edit-status").value,
+    salary: document.getElementById("edit-salary").value,
+  };
 
-  const userIndex = users.findIndex((user) => user.ID == editingUser);
+  try {
+    const res = await fetch(`http://127.0.0.1:5000/api/users/${numericID}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedUser),
+    });
+    const data = await res.json();
 
-  if (userIndex !== -1) {
-    users[userIndex].email = email;
-    users[userIndex].password = password;
-    users[userIndex].username = username;
-    users[userIndex].role = role;
-    users[userIndex].status = status;
-    users[userIndex].salary = salary;
-
-    closeModal("editModal");
-    renderTable();
+    if (data.success) {
+      closeModal("editModal");
+      await fetchUsersAndRenderTable();
+    } else {
+      alert(data.message);
+    }
+  } catch (err) {
+    alert("Erro ao editar usuário. Tente novamente.");
+    console.error(err);
   }
 };

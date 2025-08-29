@@ -1,46 +1,48 @@
-// AUTHENTICATION
-loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+document.addEventListener("DOMContentLoaded", () => {
+  // AUTHENTICATION
+  loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
-if (loggedUser === null || !loggedUser) {
-  window.location.href = "/login";
-  return
-}
-user = loggedUser[0];
+  if (loggedUser === null || !loggedUser) {
+    window.location.href = "/login";
+    return;
+  }
 
-const userRoles = {
+  const user = loggedUser;
+
+  const userRoles = {
     admin: user.role === "admin",
     manager: user.role === "manager",
-    employee: user.role === "employee"
-}
+    employee: user.role === "employee",
+  };
 
-console.log(
-  `${
-    userRoles.admin ? "Admin" : userRoles.manager ? "Gerente" : userRoles.employee ? "Funcionario" : ""
-  } - ${user.username}`
-);
+  console.log(
+    `${
+      userRoles.admin
+        ? "Admin"
+        : userRoles.manager
+        ? "Gerente"
+        : userRoles.employee
+        ? "Funcionario"
+        : ""
+    } - ${user.username}`
+  );
 
-// LOGOUT
-const logout = () => {
-  localStorage.removeItem("loggedUser");
-  window.location.reload();
-};
+  // CODE RIGHT ABOVE
+  const toggleSidebar = document.getElementById("toggleSidebar");
+  const closeSidebar = document.getElementById("closeSidebar");
+  const sidebar = document.getElementById("sidebar");
+  const sideMenu = document.querySelector(".middle-menu");
+  document.getElementById("user-role").textContent = user.role;
 
-// CODE RIGHT ABOVE
-const toggleSidebar = document.getElementById("toggleSidebar");
-const closeSidebar = document.getElementById("closeSidebar");
-const sidebar = document.getElementById("sidebar");
-const sideMenu = document.querySelector('.middle-menu');
-document.getElementById("user-role").textContent = user.role;
-
-sideMenu.innerHTML = '';
-sideMenu.innerHTML += `
+  sideMenu.innerHTML = "";
+  sideMenu.innerHTML += `
     <a href="/dashboard" class="menu-item">
         <i class="fi fi-sr-dashboard-panel"></i>
         <p class="p">Dashboard</p>
     </a>
 `;
 
-if (userRoles.admin) {
+  if (userRoles.admin) {
     sideMenu.innerHTML += `
         <a href="/access-control" class="menu-item">
             <i class="fi fi-sr-lock"></i>
@@ -55,7 +57,7 @@ if (userRoles.admin) {
             <p class="p">Reports</p>
         </a>
     `;
-} else if (userRoles.manager) {
+  } else if (userRoles.manager) {
     sideMenu.innerHTML += `
         <a href="/resource-management" class="menu-item">
             <i class="fi fi-sr-tools"></i>
@@ -66,14 +68,15 @@ if (userRoles.admin) {
             <p class="p">Reports</p>
         </a>
     `;
-} else if (userRoles.employee) {
+  } else if (userRoles.employee) {
     sideMenu.innerHTML += `
         <a href="{{ url_for('profile') }}" class="menu-item">
             <i class="fi fi-sr-user"></i>
             <p class="p">Profile</p>
         </a>
     `;
-}
+  }
+});
 
 toggleSidebar.addEventListener("click", () => {
   sidebar.classList.add("expanded");
@@ -82,3 +85,9 @@ toggleSidebar.addEventListener("click", () => {
 closeSidebar.addEventListener("click", () => {
   sidebar.classList.remove("expanded");
 });
+
+// LOGOUT
+const logout = () => {
+  localStorage.removeItem("loggedUser");
+  window.location.reload();
+};

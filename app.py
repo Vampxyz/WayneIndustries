@@ -1,7 +1,7 @@
 from flask import Flask
-from view import view_routes
+from extensions import db
+from views import view_routes
 from api import api_routes
-from models import db, User
 
 app = Flask(__name__)
 
@@ -10,13 +10,19 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
+# Registrando blueprints
 app.register_blueprint(view_routes)
-app.register_blueprint(api_routes, url_prefix='/api')
+app.register_blueprint(api_routes, url_prefix="/api")
 
 if __name__ == '__main__':
     with app.app_context():
+        from models import User
         db.create_all()
-        if not User.query.filter_by(email='ryhannalbert@gmail.com').first():
+
+        if not User.query.first():
             db.session.add(User(username="Ryhan Nalbert", email="ryhannalbert@gmail.com", password="1111", role="admin", status="active", salary="1000"))
+            db.session.add(User(username="Joao Carlos", email="joaocarlos@gmail.com", password="1111", role="manager", status="inactive", salary="500"))
+            db.session.add(User(username="Maria Anabela", email="mariaanabela@gmail.com", password="1111", role="employee", status="active", salary="1500"))
             db.session.commit()
+
     app.run(debug=True)

@@ -20,12 +20,14 @@ form.addEventListener("submit", (e) => {
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
-        localStorage.setItem("loggedUser", JSON.stringify(data.user_data))
+        localStorage.setItem("loggedUser", JSON.stringify(data.user_data));
+        // console.log(data);
+
         window.location.href = data.redirect;
       } else {
         error.innerHTML = data.message;
         error.style.display = "block";
-        
+
         setTimeout(() => {
           error.style.display = "none";
         }, 3000);
@@ -37,8 +39,8 @@ form.addEventListener("submit", (e) => {
       error.style.display = "block";
 
       setTimeout(() => {
-          error.style.display = "none";
-        }, 3000);
+        error.style.display = "none";
+      }, 3000);
     });
 });
 

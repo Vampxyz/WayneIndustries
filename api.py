@@ -1,83 +1,61 @@
 from flask import Blueprint, jsonify, request
+from models import db, User
 
-api_routes = Blueprint("api_routes", __name__)
+api_routes = Blueprint('api', __name__, url_prefix="/api")
 
-users_db = [
-    {
-        "ID": 1,
-        "username": "Ryhan Nalbert",
-        "email": "ryhannalbert@gmail.com",
-        "password": "1111",
-        "role": "admin",
-        "status": "active",
-        "salary": "1000",
-    },
-    {
-        "ID": 2,
-        "username": "Joao Carlos",
-        "email": "joaocarlos@gmail.com",
-        "password": "1111",
-        "role": "manager",
-        "status": "inactive",
-        "salary": "500",
-    },
-    {
-        "ID": 3,
-        "username": "Maria Anabela",
-        "email": "mariaanabela@gmail.com",
-        "password": "1111",
-        "role": "employee",
-        "status": "active",
-        "salary": "1500",
-    },
-]
-
-@api_routes.route("/users")
+@api_routes.route("/users", methods=["GET"])
 def get_users():
-    return jsonify({
-        "success": True,
-        "users": users_db
-    })
-
-@api_routes.route("/user/<int:user_id>")
-def get_user(user_id):
-    user = next((u for u in users_db if u["ID"] == user_id), None)
-
-    if user:
-        return jsonify(user)
-
-    return jsonify({"error": "User not found"}), 404
-
+    users = User.query.all()
+    return jsonify({"success": True, "users": [user.to_dict() for user in users]}), 200
 
 @api_routes.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
-    email = data.get("email")
-    password = data.get("password")
+    user = User.query.filter_by(email=data.get("email")).first()
 
-    user = next((u for u in users_db if u["email"] == email), None)
+    if user and user.password == data.get("password"):
+        return jsonify({
+            "success": True,
+            "message": "Successfully logged in!",
+            "redirect": "/dashboard",
+            "user_data": user.to_dict_public()
+        }), 200
+    else:   
+        return jsonify({"success": False, "message": "Invalid Credentials!"}), 401
 
-    if user and user["password"] == password:
-        return (
-            jsonify(
-                {
-                    "success": True,
-                    "message": "Login successful!",
-                    "redirect": "/dashboard",
-                    "user_data": {
-                        "ID": user["ID"],
-                        "email": user["email"],
-                        "username": user["username"],
-                        "role": user["role"],
-                    },
-                }
-            ),
-            200,
-        )
-    else:
-        return jsonify({"success": False, "message": "Credenciais inválidas!"}), 401
+@api_routes.route("/users", methods=["POST"])
+def add_user():
+    data = request.get_json()
+    new_user = User(
+        username=data['username'],
+        email=data['email'],
+        password=data['password'],
+        role=data['role'],
+        status=data['status'],
+        salary=data['salary']
+    )
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify({"success": True, "message": "Usuário adicionado com sucesso!"}), 201
 
-@api_routes.route("/access-control/<int:user_id>", methods=["PUT"])
-def updateUsers(user_id):
-    userToEdit = next((u for u in users_db if u["ID"] == user_id), None)
-     
+@api_routes.route("/users/<int:user_id>", methods=["PUT"])
+def edit_user(user_id):
+    data = request.get_json()
+    user_to_edit = User.query.get_or_404(user_id)
+    
+    user_to_edit.username = data['username']
+    user_to_edit.email = data['email']
+    user_to_edit.password = data['password']
+    user_to_edit.role = data['role']
+    user_to_edit.status = data['status']
+    user_to_edit.salary = data['salary']
+    
+    db.session.commit()
+    return jsonify({"success": True, "message": "Usuário atualizado com sucesso!"})
+
+@api_routes.route("/users/<int:user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    user_to_delete = User.query.get_or_404(user_id)
+    db.session.delete(user_to_delete)
+    db.session.commit()
+    return jsonify({"success": True, "message": "Usuário deletado com sucesso!"})
