@@ -21,10 +21,14 @@ const fetchUsersAndRenderTable = async () => {
   } catch (err) {
     userTableBody.innerHTML =
       '<tr><td colspan="8">Erro ao carregar dados. Tente novamente.</td></tr>';
+
     throw new Error({ "ERRO: ": err });
   }
 };
-fetchUsersAndRenderTable();
+
+setTimeout(() => {
+  fetchUsersAndRenderTable();
+}, 1500);
 
 const userTableBody = document.getElementById("users-table-body");
 const labels = document.querySelectorAll("label");
@@ -57,10 +61,6 @@ const renderTable = () => {
     .join("");
 };
 
-setTimeout(() => {
-  renderTable();
-}, 2000);
-
 labels.forEach((label) => {
   label.innerHTML = label.innerText
     .split("")
@@ -79,6 +79,7 @@ let editingUser = null;
 
 const openEditModal = (ID) => {
   const numericID = parseInt(ID);
+
   editingUser = numericID;
 
   const userToEdit = users.find((user) => user.ID === numericID);
@@ -100,23 +101,25 @@ const openDeleteModal = async (ID) => {
       const res = await fetch(`http://127.0.0.1:5000/api/users/${ID}`, {
         method: "DELETE",
       });
+
       const data = await res.json();
 
       if (data.success) {
         alert(data.message);
-        await fetchUsersAndRenderTable(); // Recarrega a tabela
+
+        await fetchUsersAndRenderTable();
       } else {
         alert("Erro ao deletar usuário.");
       }
     } catch (err) {
       alert("Erro na requisição. Tente novamente.");
+
       console.error(err);
     }
   }
 };
 
 const addUser = async () => {
-  // Validação dos campos
   const email = document.getElementById("add-email").value;
   const password = document.getElementById("add-password").value;
   const username = document.getElementById("add-username").value;
@@ -137,22 +140,26 @@ const addUser = async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newUser),
     });
+
     const data = await res.json();
 
     if (data.success) {
       closeModal("addModal");
+
       await fetchUsersAndRenderTable();
     } else {
       alert(data.message);
     }
   } catch (err) {
     alert("Erro ao adicionar usuário. Tente novamente.");
+
     console.error(err);
   }
 };
 
 const editUser = async () => {
   const numericID = parseInt(editingUser);
+
   const updatedUser = {
     email: document.getElementById("edit-email").value,
     password: document.getElementById("edit-password").value,
@@ -168,16 +175,19 @@ const editUser = async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedUser),
     });
+
     const data = await res.json();
 
     if (data.success) {
       closeModal("editModal");
+
       await fetchUsersAndRenderTable();
     } else {
       alert(data.message);
     }
   } catch (err) {
     alert("Erro ao editar usuário. Tente novamente.");
+
     console.error(err);
   }
 };

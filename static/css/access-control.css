@@ -184,6 +184,22 @@ main .container .table-container .users-table tbody td {
   white-space: nowrap;
 }
 
+main .container .table-container .users-table tbody td.loading-table {
+  text-align: center;
+}
+main .container .table-container .users-table tbody td.loading-table  {
+  animation: loading infinite linear 1.5s;
+}
+
+@keyframes loading {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
 .user-email {
   width: 20%;
 }
@@ -215,7 +231,7 @@ main .container .table-container .users-table tbody td {
   text-align: center;
 }
 .user-actions button {
-  padding: 0.5rem 1.5rem;
+  padding: clamp(0.4rem, 3vh, 0.5rem) clamp(1.4rem, 7vw, 1.5rem);
 
   cursor: pointer;
 

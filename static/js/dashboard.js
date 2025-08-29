@@ -1,14 +1,5 @@
 const user = JSON.parse(localStorage.getItem("loggedUser"));
 
-user = {
-  ID: 1,
-  email: "ryhannalbert@gmail.com",
-  role: "admin",
-  salary: "50000",
-  status: "active",
-  username: "Ryhan Nalbert",
-};
-
 // GREETINGS
 document.getElementById(
   "greetings"

@@ -69,16 +69,17 @@ aside {
 aside.collapsed {
   opacity: 0.6;
 }
-aside.expanded {
-  width: 280px;
-  opacity: 1;
-}
 aside.collapsed:hover {
   opacity: 1;
 }
 
+aside.expanded {
+  width: 280px;
+  opacity: 1;
+}
+
 /* Top bar */
-.top-bar {
+aside .top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -218,15 +219,18 @@ aside.expanded .menu .menu-item p {
 }
 
 /* Main */
-aside.collapsed ~ main {
-  margin-left: 60px;
-  padding: 2rem;
-  transition: margin-left 0.3s ease;
+main {
+  transition: all .3s ease;
 
+  padding: .65rem 1.3rem;
   width: 100%;
 }
+
+aside.collapsed ~ main {
+  margin-left: 60px;
+}
 aside.expanded ~ main {
-  margin-left: 280px;
+  margin-left: 300px;
 }
 
 main header {

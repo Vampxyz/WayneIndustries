@@ -27,10 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } - ${user.username}`
   );
 
-  // CODE RIGHT ABOVE
-  const toggleSidebar = document.getElementById("toggleSidebar");
-  const closeSidebar = document.getElementById("closeSidebar");
-  const sidebar = document.getElementById("sidebar");
+  // CODE RIGHT ABOVE THIS
   const sideMenu = document.querySelector(".middle-menu");
   document.getElementById("user-role").textContent = user.role;
 
@@ -77,13 +74,22 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 });
+const toggleSidebar = document.getElementById("toggleSidebar");
+const closeSidebar = document.getElementById("closeSidebar");
+const sidebar = document.getElementById("sidebar");
+
+let actualClass = null
 
 toggleSidebar.addEventListener("click", () => {
+  actualClass = "expanded"
+  sidebar.classList.remove("collapsed");
   sidebar.classList.add("expanded");
 });
 
 closeSidebar.addEventListener("click", () => {
+  actualClass = "collapsed"
   sidebar.classList.remove("expanded");
+  sidebar.classList.add("collapsed");
 });
 
 // LOGOUT
