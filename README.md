@@ -46,7 +46,7 @@ Siga os passos abaixo para clonar o repositório, instalar as dependências e ex
 Abra seu terminal e execute os seguintes comandos:
 
 ```
-git clone [https://github.com/Vampxyz/WayneIndustries.git](https://github.com/Vampxyz/WayneIndustries.git)
+git clone https://github.com/Vampxyz/WayneIndustries.git
 cd WayneIndustries
 ```
 
@@ -54,20 +54,20 @@ cd WayneIndustries
 
 Para isolar as dependências do projeto, crie e ative um ambiente virtual:
 
-# Cria o ambiente virtual
+## Cria o ambiente virtual
 
 ```
 python -m venv venv
 ```
 
-# Ativa o ambiente virtual (Windows)
+## Ativa o ambiente virtual (Windows)
 
 ```
 venv\\Scripts\\activate
 venv/Scripts/activate
 ```
 
-# Ativa o ambiente virtual (macOS/Linux)
+## Ativa o ambiente virtual (macOS/Linux)
 
 ```
 source venv/bin/activate
@@ -85,21 +85,20 @@ pip install -r requirements.txt
 
 Agora, a aplicação está pronta para ser executada. Siga estes comandos:
 
-# Define o arquivo principal do Flask
 
-# (macOS/Linux)
+## (macOS/Linux)
 
 ```
 export FLASK\_APP=app.py
 ```
 
-# (Windows)
+## (Windows)
 
 ```
 set FLASK\_APP=app.py
 ```
 
-# Inicia o servidor de desenvolvimento
+## Inicia o servidor de desenvolvimento
 
 ```
 flask run
@@ -151,7 +150,7 @@ Follow the steps below to clone the repository, install dependencies, and run th
 Open your terminal and execute the following commands:
 
 ```
-git clone [https://github.com/Vampxyz/WayneIndustries.git](https://github.com/Vampxyz/WayneIndustries.git)
+git clone https://github.com/Vampxyz/WayneIndustries.git
 cd WayneIndustries
 ```
 
@@ -159,20 +158,20 @@ cd WayneIndustries
 
 To isolate project dependencies, create and activate a virtual environment:
 
-# Create the virtual environment
+## Create the virtual environment
 
 ```
 python -m venv venv
 ```
 
-# Activate the virtual environment (Windows)
+## Activate the virtual environment (Windows)
 
 ```
 venv\\Scripts\\activate
 venv/Scripts/activate
 ```
 
-# Activate the virtual environment (macOS/Linux)
+## Activate the virtual environment (macOS/Linux)
 
 ```
 source venv/bin/activate
@@ -190,21 +189,19 @@ pip install -r requirements.txt
 
 The application is now ready to be run. Follow these commands:
 
-# Define the main Flask file
-
-# (macOS/Linux)
+## (macOS/Linux)
 
 ```
 export FLASK\_APP=app.py
 ```
 
-# (Windows)
+## (Windows)
 
 ```
 set FLASK\_APP=app.py
 ```
 
-# Start the development server
+## Start the development server
 
 ```
 flask run
