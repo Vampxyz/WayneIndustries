@@ -66,12 +66,12 @@ document.addEventListener("DOMContentLoaded", () => {
         </a>
     `;
   } else if (userRoles.employee) {
-    sideMenu.innerHTML += `
-        <a href="{{ url_for('profile') }}" class="menu-item">
-            <i class="fi fi-sr-user"></i>
-            <p class="p">Profile</p>
-        </a>
-    `;
+    // sideMenu.innerHTML += `
+    //     <a href="{{ url_for('profile') }}" class="menu-item">
+    //         <i class="fi fi-sr-user"></i>
+    //         <p class="p">Profile</p>
+    //     </a>
+    // `;
   }
 });
 const toggleSidebar = document.getElementById("toggleSidebar");

@@ -19,8 +19,14 @@
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/access-control.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/access-control.css') }}"
+    />
     <title>WI - Access Control</title>
   </head>
   <body>
@@ -69,6 +75,7 @@
         </button>
       </header>
 
+      <!-- Container -->
       <div class="container">
         <!-- Actions -->
         <div class="actions-container">
@@ -79,7 +86,9 @@
               id="search-input"
               placeholder="Search users..."
             />
+
             <i class="fi fi-sr-search"></i>
+
             <button id="search-btn" onclick="searchUser()">Search User</button>
           </div>
 
@@ -98,7 +107,6 @@
 
         <!-- Table -->
         <div class="table-container">
-          <!-- Table -->
           <table class="users-table">
             <!-- Table Header -->
             <thead>
@@ -128,6 +136,7 @@
               </tr>
             </tbody>
           </table>
+          
         </div>
       </div>
 

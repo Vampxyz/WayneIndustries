@@ -19,8 +19,14 @@
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/resource-management.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/resource-management.css') }}"
+    />
     <title>WI - Resource Management</title>
   </head>
   <body>
@@ -67,6 +73,170 @@
           <i class="fi fi-sr-user-logout"></i>
         </button>
       </header>
+
+      <!-- Container -->
+      <div class="container">
+        <!-- Actions -->
+        <div class="actions-container">
+          <div class="search-bar">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search resources..."
+            />
+
+            <i class="fi fi-sr-search"></i>
+          </div>
+
+          <div class="buttons-group">
+            <button
+              id="add-btn"
+              class="action-btn add-btn"
+              onclick="openModal('addModal')"
+            >
+              <i class="fi fi-sr-plus"></i> Add
+            </button>
+            <button
+              id="filter-btn"
+              class="action-btn filter-btn"
+              onclick="openModal('filterModal')"
+            >
+              <i class="fi fi-sr-filter"></i> Filter
+            </button>
+          </div>
+        </div>
+
+        <div id="resources-container" class="resources-container"></div>
+      </div>
+
+      <!-- Add Modal -->
+      <div id="addModal" class="modal add-modal">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Add Resource</h2>
+
+          <button class="close-modal" onclick="closeModal('addModal')">
+            <i class="fi fi-sr-cross"></i>
+          </button>
+        </div>
+
+        <!-- Modal Content -->
+        <div id="addModal" class="modal-content">
+          <!-- Form -->
+          <form id="add-form">
+            <!-- Name -->
+            <div class="form-group">
+              <input type="text" id="add-name" placeholder=" " required />
+
+              <label for="add-name">Name</label>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+              <input
+                type="text"
+                id="add-description"
+                placeholder=" "
+                required
+              />
+
+              <label for="add-description">Description</label>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+              <input type="text" id="add-category" placeholder=" " required />
+
+              <label for="add-category">Category</label>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+              <input type="number" id="add-quantity" placeholder=" " required />
+
+              <label for="add-quantity">Quantity</label>
+            </div>
+          </form>
+
+          <!-- Add Button -->
+          <button class="btn" onclick="addResource()">Add Resource</button>
+        </div>
+      </div>
+
+      <!-- Edit Modal -->
+      <div id="editModal" class="modal edit-modal">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Edit Resource</h2>
+
+          <button class="close-modal" onclick="closeModal('editModal')">
+            <i class="fi fi-sr-cross"></i>
+          </button>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="modal-content">
+          <!-- Form -->
+          <form id="edit-form">
+            <!-- Name -->
+            <div class="form-group">
+              <input type="text" id="edit-name" placeholder=" " required />
+
+              <label for="edit-name">Name</label>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+              <input
+                type="text"
+                id="edit-description"
+                placeholder=" "
+                required
+              />
+
+              <label for="edit-description">Description</label>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group">
+              <input type="text" id="edit-category" placeholder=" " required />
+
+              <label for="edit-category">Category</label>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+              <input
+                type="number"
+                id="edit-quantity"
+                placeholder=" "
+                required
+              />
+
+              <label for="edit-quantity">Quantity</label>
+            </div>
+          </form>
+
+          <!-- Save Button -->
+          <button class="btn" onclick="editResource()">Save changes</button>
+        </div>
+      </div>
+
+      <!-- Filter Modal -->
+      <div id="filterModal" class="modal filter-modal">
+        <div class="modal-header">
+          <h2 class="modal-title">Filter Resources</h2>
+          <button class="close-modal" onclick="closeModal('filterModal')">
+            <i class="fi fi-sr-cross"></i>
+          </button>
+        </div>
+        <div class="modal-content filter-content">
+          <form id="filter-form">
+            <div id="filter-checkboxes" class="checkbox-group"></div>
+          </form>
+          <button class="btn" onclick="applyFilters()">Apply Filters</button>
+        </div>
+      </div>
     </main>
 
     <script src="{{ url_for('static', filename='js/utils.js') }}"></script>

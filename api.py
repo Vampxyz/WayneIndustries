@@ -48,7 +48,7 @@ def add_user():
     
     return jsonify({"success": True, "message": "Successfully added user!"}), 201
 
-@api_routes.route("/users/<int:user_id>", methods=["PUT"])
+@api_routes.route("/user/<int:user_id>", methods=["PUT"])
 def edit_user(user_id):
     data = request.get_json()
     user_to_edit = User.query.get_or_404(user_id)
@@ -63,7 +63,7 @@ def edit_user(user_id):
     db.session.commit()
     return jsonify({"success": True, "message": "Successfully edited user!"})
 
-@api_routes.route("/users/<int:user_id>", methods=["DELETE"])
+@api_routes.route("/user/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id):
     user_to_delete = User.query.get_or_404(user_id)
     
@@ -75,7 +75,13 @@ def delete_user(user_id):
 # RESOURCES
 @api_routes.route("/resources", methods=["GET"])
 def get_resources():
-    resources = Resource.query.all()
+    categories = request.args.getlist("category")
+    
+    if categories:
+        resources = Resource.query.filter(Resource.category.in_(categories)).all()
+    else:
+        resources = Resource.query.all()
+    
     return jsonify({"success": True, "resources": [resource.to_dict() for resource in resources]}), 200
 
 @api_routes.route("/resources", methods=["POST"])
@@ -109,7 +115,6 @@ def edit_resource(resource_id):
 
 @api_routes.route("/resource/<int:resource_id>", methods=["DELETE"])
 def delete_resource(resource_id):
-    data = request.get_json()
     resource_to_delete = Resource.query.get_or_404(resource_id)
     
     db.session.delete(resource_to_delete)

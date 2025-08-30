@@ -98,7 +98,7 @@ const openEditModal = (ID) => {
 const openDeleteModal = async (ID) => {
   if (confirm("Tem certeza que deseja deletar este usuário?")) {
     try {
-      const res = await fetch(`http://127.0.0.1:5000/api/users/${ID}`, {
+      const res = await fetch(`http://127.0.0.1:5000/api/user/${ID}`, {
         method: "DELETE",
       });
 
@@ -170,7 +170,7 @@ const editUser = async () => {
   };
 
   try {
-    const res = await fetch(`http://127.0.0.1:5000/api/users/${numericID}`, {
+    const res = await fetch(`http://127.0.0.1:5000/api/user/${numericID}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedUser),
