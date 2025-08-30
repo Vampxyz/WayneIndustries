@@ -30,3 +30,20 @@ class User(db.Model):
             'status': self.status,
             'salary': self.salary,
         }
+        
+class Resource(db.Model):
+    __tablename__ = 'resources'
+    ID = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    description = db.Column(db.String(120), nullable=False)
+    category = db.Column(db.String(80), nullable=False)
+    quantity = db.Column(db.String(80), nullable=False)
+    
+    def to_dict(self):
+        return {
+            'ID': self.ID,
+            'name': self.name,
+            'description': self.description,
+            'category': self.category,
+            'quantity': self.quantity,
+        }

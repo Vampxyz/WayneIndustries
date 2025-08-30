@@ -16,7 +16,7 @@ app.register_blueprint(api_routes, url_prefix="/api")
 
 if __name__ == '__main__':
     with app.app_context():
-        from models import User
+        from models import User, Resource
         db.create_all()
 
         if not User.query.first():
@@ -24,5 +24,12 @@ if __name__ == '__main__':
             db.session.add(User(username="Joao Carlos", email="joaocarlos@gmail.com", password="1111", role="manager", status="inactive", salary="500"))
             db.session.add(User(username="Maria Anabela", email="mariaanabela@gmail.com", password="1111", role="employee", status="active", salary="1500"))
             db.session.commit()
-
+            
+        if not Resource.query.first():
+            db.session.add(Resource(name="Batarang", description="Letal weapon throwable by the user", category="weapon", quantity="10"))
+            db.session.add(Resource(name="Super Armor", description="Protects the user from physical attacks", category="armor", quantity="5"))
+            db.session.add(Resource(name="Super Shield", description="Protects the user from magical attacks", category="shield", quantity="3"))
+            db.session.add(Resource(name="Super Sword", description="Letal weapon slashed by the user", category="weapon", quantity="10"))            
+            db.session.commit()
+        
     app.run(debug=True)
