@@ -18,6 +18,10 @@ const filterModal = document.getElementById("filterModal");
 const filterCheckboxes = document.getElementById("filter-checkboxes");
 const labels = document.querySelectorAll("label");
 
+addModal.style.display = "none";
+editModal.style.display = "none";
+filterModal.style.display = "none";
+
 labels.forEach((label) => {
   label.innerHTML = label.innerText
     .split("")

@@ -191,7 +191,6 @@ main .container .actions-container .buttons-group {
 }
 
 /* 2 - Modals */
-/* AQUI */
 main .modal {
   position: absolute;
   z-index: 9999;
